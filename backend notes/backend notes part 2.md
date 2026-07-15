@@ -8495,4 +8495,4 @@ req.user
 - Passport handles the OAuth flow.
 - Sessions keep users logged in.
 - `req.user` contains the authenticated GitHub profile.
-- Protected routes use `req.isAuthenticated()`
+- Protected routes use `req.isAuthenticated()`.
