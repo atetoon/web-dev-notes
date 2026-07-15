@@ -8486,13 +8486,3 @@ req.user
 ```
 
 ---
-
-## 9.16 Key Takeaways
-
-- GitHub OAuth lets users log in using their GitHub account.
-- Client ID identifies the application.
-- Client Secret authenticates the application.
-- Passport handles the OAuth flow.
-- Sessions keep users logged in.
-- `req.user` contains the authenticated GitHub profile.
-- Protected routes use `req.isAuthenticated()`.
