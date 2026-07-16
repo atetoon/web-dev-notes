@@ -8496,3 +8496,755 @@ req.user
 - Sessions keep users logged in.
 - `req.user` contains the authenticated GitHub profile.
 - Protected routes use `req.isAuthenticated()`.
+
+# Data Security
+
+---
+
+# 1. Transport Layer Security (TLS)
+
+## 1.1 What is TLS?
+
+Transport Layer Security (TLS) is a protocol that secures communication between a client and a server.
+
+It provides:
+
+- Encryption
+    
+- Authentication
+    
+- Data Integrity
+    
+
+TLS powers **HTTPS**.
+
+```
+Browser
+    │
+Encrypted Connection (TLS)
+    │
+Server
+```
+
+> TLS is **not** an encryption algorithm. It uses cryptographic algorithms internally.
+
+---
+
+## 1.2 TLS vs SSL
+
+### SSL
+
+- Older protocol
+    
+- Deprecated (2015)
+    
+- Contains known vulnerabilities
+    
+
+### TLS
+
+- Successor of SSL
+    
+- More secure
+    
+- Used today
+    
+
+Although people say **SSL Certificate**, they usually mean a **TLS Certificate**.
+
+---
+
+## 1.3 TLS Handshake
+
+Purpose:
+
+1. Authenticate the server.
+    
+2. Create a shared secret.
+    
+3. Establish encrypted communication.
+    
+
+Flow:
+
+```
+Client Hello
+        │
+        ▼
+Server Hello + Certificate
+        │
+        ▼
+Verify Certificate
+        │
+        ▼
+Exchange Premaster Secret
+        │
+        ▼
+Generate Session Keys
+        │
+        ▼
+Encrypted Test Messages
+        │
+        ▼
+Secure TLS Connection
+```
+
+---
+
+## 1.4 Certificates
+
+TLS uses **Public Key Infrastructure (PKI)**.
+
+Certificate Authority (CA):
+
+- Verifies server identity.
+    
+- Digitally signs certificates.
+    
+
+Browser:
+
+- Verifies certificate using CA's public key.
+    
+
+---
+
+## 1.5 Why TLS?
+
+Without TLS:
+
+- Passwords visible
+    
+- Cookies visible
+    
+- Sensitive data can be intercepted
+    
+
+With TLS:
+
+- Encrypted communication
+    
+- Secure authentication
+    
+- HTTPS enabled
+    
+
+---
+
+# 2. Role-Based Access Control (RBAC)
+
+## 2.1 What is RBAC?
+
+RBAC assigns **permissions to roles**, then assigns **roles to users**.
+
+```
+User
+   │
+   ▼
+Role
+   │
+   ▼
+Permissions
+```
+
+---
+
+## 2.2 Why RBAC?
+
+Benefits:
+
+- Easier permission management
+    
+- Scalable
+    
+- Reduces human error
+    
+- Prevents Broken Access Control
+    
+
+---
+
+## 2.3 Principle of Least Privilege
+
+Users should receive **only the permissions necessary** to perform their tasks.
+
+Never grant extra privileges.
+
+Often used with **Default Deny**.
+
+```
+No Permission
+      │
+Grant Only Needed Access
+      │
+Least Privilege
+```
+
+---
+
+## 2.4 Designing an RBAC System
+
+Steps:
+
+1. Identify users.
+    
+2. Create roles.
+    
+3. Assign permissions to roles.
+    
+4. Assign users to roles.
+    
+5. Update roles as requirements change.
+    
+
+Example:
+
+```
+Student
+Teacher
+Programming
+Admin
+```
+
+---
+
+## 2.5 RBAC Hierarchy
+
+```
+Permissions
+      │
+      ▼
+Roles
+      │
+      ▼
+Users
+```
+
+Users can belong to multiple roles.
+
+---
+
+# 3. Authentication & Authorization in PostgreSQL
+
+---
+
+## 3.1 `pg_hba.conf`
+
+Controls **who can connect** to PostgreSQL.
+
+Syntax:
+
+```text
+connection_type database user address auth_method
+```
+
+Example:
+
+```text
+hostssl db_customers +g_employees samenet scram-sha-256
+```
+
+Meaning:
+
+- SSL required
+    
+- Only `db_customers`
+    
+- Members of `g_employees`
+    
+- Same network
+    
+- SCRAM-SHA-256 authentication
+    
+
+---
+
+## 3.2 Rule Order
+
+Rules are checked **top to bottom**.
+
+First matching rule wins.
+
+Example:
+
+```text
+host all all all reject
+```
+
+Usually placed **last**.
+
+Implements **Default Deny**.
+
+---
+
+## 3.3 PostgreSQL RBAC
+
+Use three layers.
+
+```
+User
+   │
+belongs to
+   ▼
+Group Role
+   │
+contains
+   ▼
+Permission Role
+   │
+has
+   ▼
+Database Privileges
+```
+
+---
+
+## 3.4 Create Roles
+
+Permission Role:
+
+```sql
+CREATE ROLE p_customers_read;
+```
+
+Group Role:
+
+```sql
+CREATE ROLE g_employees;
+```
+
+User Role:
+
+```sql
+CREATE ROLE u_example
+WITH LOGIN;
+```
+
+---
+
+## 3.5 Grant Permissions
+
+Grant SQL privilege:
+
+```sql
+GRANT SELECT
+ON customers
+TO p_customers_read;
+```
+
+Grant role:
+
+```sql
+GRANT p_customers_read
+TO g_employees;
+```
+
+Add user to group:
+
+```sql
+GRANT g_employees
+TO u_example;
+```
+
+---
+
+## 3.6 Revoke Permissions
+
+Remove default permission:
+
+```sql
+REVOKE SELECT
+ON customers
+FROM PUBLIC;
+```
+
+Implements **Default Deny**.
+
+---
+
+## 3.7 `postgresql.conf`
+
+Controls server behavior.
+
+### `listen_addresses`
+
+Allowed IPs.
+
+Example:
+
+```text
+listen_addresses='104.20.25.250'
+```
+
+Avoid:
+
+```text
+listen_addresses='*'
+```
+
+---
+
+### `port`
+
+Default:
+
+```text
+5432
+```
+
+Can change:
+
+```text
+port=54831
+```
+
+Helps reduce automated scans.
+
+---
+
+### `ssl`
+
+Enable encrypted connections.
+
+```text
+ssl=on
+```
+
+Requires certificates.
+
+---
+
+## 3.8 PostgreSQL Security Layers
+
+```
+Client
+      │
+      ▼
+postgresql.conf
+(Server Settings)
+      │
+      ▼
+pg_hba.conf
+(Connection Rules)
+      │
+      ▼
+Authentication
+      │
+      ▼
+Roles & Permissions
+      │
+      ▼
+Database Access
+```
+
+---
+
+# 4. Managing Environment Variables, API Keys & Files
+
+---
+
+## 4.1 Environment Variables
+
+Store configuration outside the application.
+
+Example:
+
+```text
+DB_HOST=localhost
+DB_PORT=5432
+API_KEY=abc123
+JWT_SECRET=mysecret
+```
+
+Usually stored in:
+
+```text
+.env
+```
+
+Benefits:
+
+- No hardcoded secrets.
+    
+- Easy deployment.
+    
+- Different environments use different values.
+    
+
+---
+
+## 4.2 Creating `.env`
+
+Create:
+
+```bash
+touch .env
+```
+
+Syntax:
+
+```text
+NAME=VALUE
+```
+
+Example:
+
+```text
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=root
+DB_PASS=password
+```
+
+Naming convention:
+
+- UPPERCASE
+    
+- Underscores
+    
+
+---
+
+## 4.3 Using `dotenv`
+
+Install:
+
+```bash
+npm install dotenv
+```
+
+Import:
+
+ES Modules
+
+```js
+import dotenv from "dotenv";
+```
+
+CommonJS
+
+```js
+const dotenv = require("dotenv");
+```
+
+Load:
+
+```js
+dotenv.config();
+```
+
+Access:
+
+```js
+process.env.DB_HOST
+process.env.API_KEY
+```
+
+All values are **strings**.
+
+---
+
+## 4.4 Database Credentials
+
+Never hardcode:
+
+❌
+
+```js
+const DB_PASS = "password";
+```
+
+Use:
+
+```text
+DB_HOST=...
+DB_PORT=...
+DB_USER=...
+DB_PASS=...
+```
+
+Access:
+
+```js
+process.env.DB_HOST
+process.env.DB_PASS
+```
+
+---
+
+## 4.5 API Keys
+
+Store API keys inside `.env`.
+
+Example:
+
+```text
+WEATHER_API_KEY=abc123
+```
+
+Use:
+
+```js
+const apiKey =
+process.env.WEATHER_API_KEY;
+```
+
+Never expose API keys publicly.
+
+---
+
+## 4.6 `.gitignore`
+
+Prevents Git from tracking files.
+
+Create:
+
+```text
+.gitignore
+```
+
+Ignore files:
+
+```text
+.env
+```
+
+Ignore folders:
+
+```text
+node_modules/
+public/
+```
+
+OS files:
+
+```text
+.DS_Store
+Thumbs.db
+```
+
+Check:
+
+```bash
+git status
+```
+
+---
+
+## 4.7 Sharing Projects
+
+Never upload:
+
+```text
+.env
+```
+
+Instead provide:
+
+```text
+example.env
+```
+
+Example:
+
+```text
+DB_HOST=
+DB_PORT=
+DB_USER=
+DB_PASS=
+JWT_SECRET=
+API_KEY=
+```
+
+Developers copy:
+
+```
+example.env
+      │
+Rename
+      ▼
+.env
+```
+
+Fill in their own credentials.
+
+---
+
+## 4.8 README
+
+Include setup instructions.
+
+Example:
+
+```text
+1. Copy example.env to .env
+2. Add your API key.
+3. npm install
+4. npm start
+```
+
+Do **not** ignore:
+
+- `README.md`
+    
+- `example.env`
+    
+
+---
+
+# Security Flow
+
+```
+Client
+     │
+     ▼
+TLS (HTTPS)
+     │
+     ▼
+Server
+     │
+     ▼
+Authentication
+     │
+     ▼
+Authorization (RBAC)
+     │
+     ▼
+PostgreSQL
+     │
+     ▼
+Roles & Permissions
+     │
+     ▼
+Sensitive Data
+     │
+     ▼
+Secrets Stored in .env
+     │
+     ▼
+Ignored by .gitignore
+```
+
+---
+
+# Best Practices
+
+- Use HTTPS (TLS) for all communication.
+    
+- Follow the Principle of Least Privilege.
+    
+- Use RBAC instead of assigning permissions directly to users.
+    
+- Configure PostgreSQL securely (`pg_hba.conf`, `postgresql.conf`).
+    
+- Store secrets in `.env`.
+    
+- Load them with `dotenv`.
+    
+- Access them using `process.env`.
+    
+- Never commit `.env` to Git.
+    
+- Share `example.env` instead.
+    
+- Document setup in `README.md`.
