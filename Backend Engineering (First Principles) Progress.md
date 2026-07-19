@@ -1,11 +1,11 @@
 
 ## 📚 Playlist Progress
 
-- [ ] 01. Roadmap for Backend from First Principles
-- [ ] 02. Walk the Path of a True Backend Engineer
-- [ ] 03. What is a Backend, How Do They Work and Why Do We Need Them?
-- [ ] 04. Benefits of Learning Backend Engineering from First Principles
-- [ ] 05. Understanding HTTP for Backend Engineers: Where It All Starts
+- [x] 01. Roadmap for Backend from First Principles
+- [x] 02. Walk the Path of a True Backend Engineer
+- [x] 03. What is a Backend, How Do They Work and Why Do We Need Them?
+- [x] 04. Benefits of Learning Backend Engineering from First Principles
+- [x] 05. Understanding HTTP for Backend Engineers: Where It All Starts
 - [ ] 06. What is Routing in Backend? How Requests Find Their Way Home
 - [ ] 07. Serialization and Deserialization for Backend Engineers
 - [ ] 08. Authentication and Authorization for Backend Engineers

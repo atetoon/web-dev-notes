@@ -26,7 +26,7 @@
 
 - [x] Data Security
 
-- [ ] Common Attacks on Web Applications
+- [x] Common Attacks on Web Applications
 
 - [ ] Fundamentals of Operating Systems
 
