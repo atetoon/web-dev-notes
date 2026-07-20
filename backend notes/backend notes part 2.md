@@ -9528,3 +9528,937 @@ Remember:
 - Run **ESLint + eslint-plugin-security**.
     
 - Follow the **Incident Response Lifecycle**: **Preparation → Detection → Analysis → Remediation → Review**.
+
+# Fundamentals of Operating Systems (Parent Revision Notes)
+
+## 1. What is an Operating System (OS)?
+
+- **Operating System (OS)** is system software that manages computer hardware and software resources.
+    
+- Acts as an **interface between users/applications and hardware**.
+    
+- Provides an environment for programs to execute.
+    
+
+### Main Responsibilities
+
+- Process management
+    
+- Memory management
+    
+- File system management
+    
+- Device (I/O) management
+    
+- Security & protection
+    
+- Resource allocation
+    
+
+---
+
+# 2. Process Management
+
+## Process
+
+- A **process** is a program in execution.
+    
+- Each process has:
+    
+    - Program Counter (PC)
+        
+    - Registers
+        
+    - Stack
+        
+    - Heap
+        
+    - Process Control Block (PCB)
+        
+
+## Process States
+
+```text
+New
+ ↓
+Ready
+ ↓
+Running
+ ↙   ↘
+Waiting  Terminated
+   ↓
+ Ready
+```
+
+## Scheduling
+
+### Goals
+
+- High throughput
+    
+- Low waiting time
+    
+- Low response time
+    
+- Fair CPU allocation
+    
+
+### Scheduling Algorithms
+
+- FCFS
+    
+- SJF
+    
+- SRTF
+    
+- Priority Scheduling
+    
+- Round Robin
+    
+
+### Key Concepts
+
+- Convoy effect (FCFS)
+    
+- Starvation
+    
+- Aging
+    
+- Time quantum (Round Robin)
+    
+
+---
+
+# 3. Threads
+
+## Thread
+
+- Smallest unit of CPU execution.
+    
+- Threads within a process share:
+    
+    - Code
+        
+    - Heap
+        
+    - Open files
+        
+- Each thread has its own:
+    
+    - Stack
+        
+    - Registers
+        
+    - Program Counter
+        
+
+## Multithreading
+
+- Multiple threads execute concurrently within one process.
+    
+
+### Benefits
+
+- Better responsiveness
+    
+- Higher CPU utilization
+    
+- Lower overhead than processes
+    
+- Resource sharing
+    
+
+### Synchronization
+
+Used to avoid race conditions.
+
+Mechanisms:
+
+- Mutex
+    
+- Semaphore
+    
+- Monitor
+    
+
+Problems:
+
+- Deadlock
+    
+- Starvation
+    
+- Livelock
+    
+
+---
+
+# 4. Memory Management
+
+## Purpose
+
+Manages allocation and deallocation of RAM.
+
+### Responsibilities
+
+- Allocation
+    
+- Deallocation
+    
+- Protection
+    
+- Optimization
+    
+
+---
+
+## Memory Hierarchy
+
+```text
+Registers
+     ↓
+Cache
+     ↓
+RAM
+     ↓
+SSD / HDD
+```
+
+- Higher → Faster, Smaller
+    
+- Lower → Slower, Larger
+    
+
+---
+
+## Segmentation
+
+- Variable-sized memory segments.
+    
+- Requires contiguous allocation.
+    
+- Suffers from **external fragmentation**.
+    
+
+---
+
+## Paging
+
+- Fixed-size pages and frames.
+    
+- Non-contiguous allocation.
+    
+- Eliminates external fragmentation.
+    
+- Supports virtual memory.
+    
+
+---
+
+## Virtual Memory
+
+- Gives each process its own virtual address space.
+    
+- Maps virtual addresses to physical memory.
+    
+- Provides isolation and protection.
+    
+
+---
+
+## Linkers & Loaders
+
+```text
+Source Code
+      ↓
+Compiler
+      ↓
+Object File
+      ↓
+Linker
+      ↓
+Executable
+      ↓
+Loader
+      ↓
+RAM
+      ↓
+Execution
+```
+
+---
+
+# 5. File Systems
+
+## File System
+
+Organizes and manages data on storage devices.
+
+### Components
+
+- Files
+    
+- Directories
+    
+- Metadata
+    
+- Permissions
+    
+
+---
+
+## File Metadata
+
+- Name
+    
+- Size
+    
+- Owner
+    
+- Timestamps
+    
+- Permissions
+    
+
+---
+
+## File Permissions
+
+```text
+-rwxr-xr--
+```
+
+- Owner
+    
+- Group
+    
+- Others
+    
+
+Permissions:
+
+- r → Read
+    
+- w → Write
+    
+- x → Execute
+    
+
+---
+
+## Storage
+
+### Sector
+
+- Smallest physical storage unit.
+    
+
+### Block
+
+- Smallest logical filesystem unit.
+    
+
+---
+
+## File System Layers
+
+```text
+Application
+      ↓
+Logical File System
+      ↓
+File Organization Module
+      ↓
+Basic File System
+      ↓
+I/O Control
+      ↓
+Storage Device
+```
+
+---
+
+## Common File Operations
+
+- Create
+    
+- Read
+    
+- Write
+    
+- Delete
+    
+
+Commands:
+
+- `touch`
+    
+- `cat`
+    
+- `echo`
+    
+- `rm`
+    
+
+---
+
+## Directory Operations
+
+- `mkdir`
+    
+- `ls`
+    
+- `rm -r`
+    
+
+---
+
+# 6. I/O Systems
+
+## I/O Hardware
+
+### Device Categories
+
+- Human-readable
+    
+- Machine-readable
+    
+- Communication
+    
+
+---
+
+## Device Drivers
+
+Software that allows the OS to communicate with hardware.
+
+Types:
+
+- Kernel-mode
+    
+- User-mode
+    
+
+---
+
+## Data Transfer Methods
+
+- Character Devices
+    
+- Block Devices
+    
+- Network Devices
+    
+
+---
+
+## Blocking vs Non-blocking
+
+|Blocking|Non-blocking|
+|---|---|
+|Waits|Doesn't wait|
+|Synchronous|Asynchronous|
+
+---
+
+## Interrupts vs Polling
+
+|Interrupt|Polling|
+|---|---|
+|Device notifies CPU|CPU checks devices|
+|Hardware-based|Software-based|
+
+---
+
+## Memory-Mapped I/O (MMIO)
+
+- Shared address space for memory and I/O devices.
+    
+
+---
+
+## Direct Memory Access (DMA)
+
+- Transfers data directly between device and RAM.
+    
+- Uses a DMA Controller.
+    
+- Reduces CPU overhead.
+    
+
+---
+
+## I/O Software Layers
+
+```text
+User Space
+──────────
+User-level I/O Software
+        ↓
+
+Kernel Space
+────────────
+Device-Independent Software
+        ↓
+Device Drivers
+        ↓
+Interrupt Handlers
+        ↓
+
+Hardware
+```
+
+### User Space
+
+- Runs user applications.
+    
+
+### Kernel Space
+
+- Manages hardware and system resources.
+    
+
+### Device-Independent Software
+
+- Generic services:
+    
+    - Buffering
+        
+    - Error handling
+        
+    - Resource allocation
+        
+
+### Interrupt Handler
+
+- Receives interrupt signals.
+    
+- Queues and processes them.
+    
+
+---
+
+# Important Comparisons
+
+|Concept|Difference|
+|---|---|
+|Process vs Thread|Process has separate memory; threads share memory|
+|Blocking vs Non-blocking|Waits vs continues execution|
+|Interrupt vs Polling|Device notifies CPU vs CPU checks device|
+|Paging vs Segmentation|Fixed-size vs variable-size memory|
+|MMIO vs DMA|CPU-managed vs DMA Controller-managed transfers|
+|Driver vs Device-Independent Software|Device-specific vs generic|
+
+---
+
+# Important Points ⭐
+
+- OS is the interface between **hardware and applications**.
+    
+- **PCB** stores process information.
+    
+- **Thread** = smallest execution unit.
+    
+- **Mutex/Semaphore** prevent race conditions.
+    
+- **Virtual memory** isolates processes.
+    
+- **Paging** removes external fragmentation.
+    
+- **Linker** creates executables; **Loader** loads them into RAM.
+    
+- **Metadata** describes files.
+    
+- **Blocks** are logical; **sectors** are physical.
+    
+- **Blocking = synchronous**, **Non-blocking = asynchronous**.
+    
+- **Interrupts** are hardware signals.
+    
+- **DMA** transfers data directly between device and RAM.
+    
+- **User space** runs applications; **Kernel space** manages hardware.
+    
+- **Device drivers** are device-specific; **Device-independent software** is generic.
+    
+
+---
+
+# One-Minute Revision 🚀
+
+- **Operating System:** Manages hardware, software, memory, files, and devices.
+    
+- **Processes:** Programs in execution; scheduled by the CPU.
+    
+- **Threads:** Lightweight execution units sharing process resources.
+    
+- **Memory:** Allocation, protection, paging, segmentation, virtual memory.
+    
+- **Filesystems:** Organize files, directories, metadata, and permissions.
+    
+- **I/O Hardware:** Devices, drivers, interrupts, DMA, MMIO.
+    
+- **I/O Software:** User space, kernel space, device-independent software, drivers, interrupt handlers.
+    
+
+---
+
+# Entire Module at a Glance
+
+```text
+Operating System
+├── Process Management
+│   ├── Processes
+│   ├── Threads
+│   ├── Scheduling
+│   └── Synchronization
+│
+├── Memory Management
+│   ├── Memory Hierarchy
+│   ├── Segmentation
+│   ├── Paging
+│   ├── Virtual Memory
+│   └── Linkers & Loaders
+│
+├── File Systems
+│   ├── Files & Directories
+│   ├── Metadata & Permissions
+│   ├── Storage (Blocks/Sectors)
+│   └── File Operations
+│
+└── I/O Systems
+    ├── I/O Hardware
+    ├── Device Drivers
+    ├── Blocking vs Non-blocking
+    ├── Interrupts
+    ├── MMIO & DMA
+    └── I/O Software
+```
+
+# Caching and CDNs (Parent Revision Notes)
+
+## 1. Caching
+
+### What is Caching?
+
+- **Caching** is the process of storing **temporary copies of frequently accessed data** in a fast storage layer called a **cache**.
+    
+- Reduces access time by avoiding repeated retrieval from slower storage (e.g., databases or hard drives).
+    
+
+### How Caching Works
+
+```text
+Client Request
+      ↓
+     Cache
+   ↙       ↘
+Hit        Miss
+ ↓           ↓
+Return     Database/Storage
+Data           ↓
+         Store in Cache
+               ↓
+         Return Data
+```
+
+### Cache Terms
+
+- **Cache Hit** → Requested data is found in the cache.
+    
+- **Cache Miss** → Requested data is not found; fetched from storage and then cached.
+    
+
+---
+
+## 2. Benefits of Caching
+
+- Faster response time
+    
+- Reduced latency
+    
+- Lower server/database load
+    
+- Improved scalability
+    
+- Better user experience
+    
+
+---
+
+## 3. Challenges of Caching
+
+### Stale Data
+
+- Cached data becomes outdated when the original data changes.
+    
+- Solved using cache invalidation or updates.
+    
+
+### Cache Warm-Up
+
+- A new cache starts empty.
+    
+- Initial requests are cache misses.
+    
+- Performance improves as the cache fills.
+    
+
+---
+
+## 4. Cache Layers
+
+### Client-Layer Cache
+
+- Browser cache.
+    
+- Stores images, CSS, JavaScript, etc.
+    
+
+### Application-Layer Cache
+
+- Server-side cache.
+    
+- Stores API responses, pages, computed results.
+    
+
+### Data-Layer Cache
+
+- Database cache.
+    
+- Stores query results and frequently accessed records.
+    
+
+---
+
+## 5. Cache Eviction Policies
+
+### Why Eviction?
+
+- Cache size is limited.
+    
+- Policies decide **which item to remove** when full.
+    
+
+### Least Recently Used (LRU)
+
+- Removes the **least recently accessed** item.
+    
+- Uses timestamps.
+    
+
+### Most Recently Used (MRU)
+
+- Removes the **most recently accessed** item.
+    
+- Useful for cyclic/sequential access patterns.
+    
+
+### Least Frequently Used (LFU)
+
+- Removes the **least frequently accessed** item.
+    
+- Uses access counters.
+    
+
+### Comparison
+
+|Policy|Removes|Tracks|
+|---|---|---|
+|LRU|Least recently used|Timestamp|
+|MRU|Most recently used|Timestamp|
+|LFU|Least frequently used|Access count|
+
+---
+
+# 6. Content Delivery Networks (CDNs)
+
+## What is a CDN?
+
+- A **Content Delivery Network (CDN)** is a **globally distributed network of cache servers** that delivers content from locations closer to users.
+    
+- Reduces latency and improves performance.
+    
+
+---
+
+## How a CDN Works
+
+```text
+User
+  │
+  ▼
+Nearest CDN Server
+      │
+ Cache Miss?
+   │      │
+  No     Yes
+   │      ▼
+Return  Origin Server
+Data        │
+            ▼
+      Cache Content
+            │
+       Return Data
+```
+
+---
+
+## Origin Server
+
+- Main server storing the original website and application data.
+    
+- CDN fetches data from the origin server when necessary.
+    
+
+---
+
+## What CDNs Cache
+
+- HTML
+    
+- CSS
+    
+- JavaScript
+    
+- Images
+    
+- Videos
+    
+- Documents
+    
+- Static assets
+    
+
+---
+
+## Benefits of CDNs
+
+### Faster Content Delivery
+
+- Content served from the nearest CDN server.
+    
+- Lower latency.
+    
+
+### Increased Availability
+
+- Cached data remains available even if the origin server is down.
+    
+
+### Improved Security
+
+- CDN acts as the first layer between users and the origin server.
+    
+- Helps absorb malicious traffic.
+    
+
+---
+
+## Challenges of CDNs
+
+### Outdated Content
+
+- Cached copies may become stale.
+    
+- Managed using **Cache-Control** headers and cache invalidation.
+    
+
+### Increased Cost
+
+- More CDN servers or cloud CDN services increase cost.
+    
+
+### When CDNs May Not Help
+
+- Small/low-traffic websites.
+    
+- Restricted access in some regions.
+    
+- CDN infrastructure under attack.
+    
+
+---
+
+## Popular CDN Providers
+
+- Akamai
+    
+- Fastly
+    
+- Amazon CloudFront
+    
+- Microsoft Azure CDN
+    
+
+---
+
+# Important Comparisons
+
+|Concept|Difference|
+|---|---|
+|Cache Hit vs Cache Miss|Data found vs data fetched from storage|
+|Client Cache vs Application Cache|Browser-side vs Server-side|
+|Application Cache vs Data Cache|Application responses vs Database queries|
+|LRU vs MRU vs LFU|Least recent vs Most recent vs Least frequent|
+|Origin Server vs CDN|Original content vs Cached global copies|
+
+---
+
+# Important Points ⭐
+
+- **Cache** = Fast temporary storage.
+    
+- **Cache Hit** → Data found in cache.
+    
+- **Cache Miss** → Data fetched from storage.
+    
+- Benefits:
+    
+    - Faster performance
+        
+    - Lower server load
+        
+    - Better scalability
+        
+- Challenges:
+    
+    - Stale data
+        
+    - Cache warm-up
+        
+- Cache layers:
+    
+    - Client
+        
+    - Application
+        
+    - Data
+        
+- Eviction policies:
+    
+    - **LRU** → Least recently used
+        
+    - **MRU** → Most recently used
+        
+    - **LFU** → Least frequently used
+        
+- **CDN** = Distributed cache servers.
+    
+- **Origin Server** = Original source of content.
+    
+- CDNs improve:
+    
+    - Speed
+        
+    - Availability
+        
+    - Security
+        
+- CDN challenges:
+    
+    - Stale content
+        
+    - Increased cost
+        
+
+---

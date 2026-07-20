@@ -1,6 +1,7 @@
-## **<font color="#f79646">to cook today (17-july)</font>** 🍳
+## **<font color="#f79646">to cook today (20-july)</font>** 🍳
 
 - [x] codeforces problems (4 problems)
-- [ ] basics of OS full module
+- [x] cache module
+- [x] scalability module
 - [ ] routing in backend
 - [ ] sheriyans backend video start
