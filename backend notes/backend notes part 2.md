@@ -10462,3 +10462,631 @@ Data        │
         
 
 ---
+# DevOps
+
+## What is DevOps?
+
+DevOps is a culture and set of practices that combines **Development (Dev)** and **Operations (Ops)** to automate and improve the software development lifecycle.
+
+### Goals
+
+- Faster software delivery
+    
+- Better collaboration
+    
+- Automation
+    
+- Reliable deployments
+    
+- Continuous improvement
+    
+
+---
+
+## DevOps Lifecycle
+
+```text
+Plan
+   │
+Develop
+   │
+Build
+   │
+Test
+   │
+Release
+   │
+Deploy
+   │
+Operate
+   │
+Monitor
+   │
+Feedback
+   └────────────► Plan
+```
+
+---
+
+# DevOps Culture
+
+### Principles
+
+- Collaboration between teams
+    
+- Shared responsibility
+    
+- Automation
+    
+- Continuous feedback
+    
+- Continuous improvement
+    
+
+### Benefits
+
+- Faster releases
+    
+- Better software quality
+    
+- Fewer deployment failures
+    
+- Faster recovery from issues
+    
+
+---
+
+# Infrastructure
+
+Infrastructure is everything required to run an application.
+
+Includes:
+
+- Servers
+    
+- Storage
+    
+- Network
+    
+- Operating System
+    
+- Database
+    
+
+---
+
+## Types of Infrastructure
+
+### In-house Infrastructure
+
+- Physical servers owned by organization
+    
+- High maintenance
+    
+- Full control
+    
+
+### Cloud Infrastructure
+
+- Managed by cloud providers
+    
+- Highly scalable
+    
+- Pay-as-you-go
+    
+
+### Serverless Infrastructure
+
+- No server management
+    
+- Automatically scales
+    
+- Pay only when code runs
+    
+
+---
+
+# Environments
+
+Applications pass through multiple environments before reaching users.
+
+|Environment|Purpose|
+|---|---|
+|Development|Writing code|
+|Integration|Combining features|
+|Testing|Finding bugs|
+|Staging|Production-like testing|
+|Production|Live application|
+
+---
+
+# Infrastructure as Code (IaC)
+
+Infrastructure is created and managed using code instead of manual setup.
+
+### Benefits
+
+- Automation
+    
+- Consistency
+    
+- Version Control
+    
+- Easy rollback
+    
+- Faster provisioning
+    
+
+---
+
+## IaC Workflow
+
+```text
+Write Code
+     │
+Version Control
+     │
+Provision Infrastructure
+     │
+Configure Resources
+     │
+Deploy Application
+```
+
+---
+
+## Provisioning vs Configuration
+
+|Provisioning|Configuration|
+|---|---|
+|Creates infrastructure|Configures infrastructure|
+|VM, Server, Database|Software, Packages, Services|
+
+---
+
+## Declarative vs Imperative
+
+|Declarative|Imperative|
+|---|---|
+|Desired state|Step-by-step instructions|
+|Easier maintenance|More control|
+
+---
+
+## Popular IaC Tools
+
+### Terraform
+
+- Infrastructure Provisioning
+    
+
+### Ansible
+
+- Configuration Management
+    
+
+### Chef
+
+- Configuration Automation
+    
+
+### Puppet
+
+- Infrastructure Configuration
+    
+
+---
+
+# Application Architectures
+
+## Monolithic
+
+Single application containing all components.
+
+### Pros
+
+- Easy to build
+    
+- Simple deployment
+    
+
+### Cons
+
+- Difficult to scale
+    
+- Entire app redeployed after changes
+    
+
+---
+
+## N-Tier
+
+Application divided into layers.
+
+```text
+Presentation Layer
+        │
+Business Logic Layer
+        │
+Database Layer
+```
+
+### Pros
+
+- Better organization
+    
+- Easier maintenance
+    
+
+---
+
+## Microservices
+
+Application divided into independent services.
+
+```text
+User
+ │
+API Gateway
+ ├── User Service
+ ├── Payment Service
+ ├── Order Service
+ └── Notification Service
+```
+
+### Advantages
+
+- Independent deployment
+    
+- Independent scaling
+    
+- Fault isolation
+    
+
+### Disadvantages
+
+- Complex communication
+    
+- More infrastructure
+    
+
+---
+
+# Monitoring
+
+Monitoring continuously checks application health.
+
+### Common Metrics
+
+- CPU Usage
+    
+- Memory Usage
+    
+- Disk Usage
+    
+- Response Time
+    
+- Request Count
+    
+- Error Rate
+    
+
+---
+
+# Observability
+
+Observability helps determine **why** a problem occurred.
+
+Built on:
+
+- Metrics
+    
+- Logs
+    
+- Traces
+    
+
+---
+
+# Resiliency
+
+Resiliency is the ability of a system to continue operating despite failures.
+
+### Threats
+
+- Internal failures
+    
+- External failures
+    
+- Cyber attacks
+    
+
+---
+
+## Improving Resiliency
+
+- Load Balancing
+    
+- Auto Scaling
+    
+- Input Validation
+    
+- Caching
+    
+- Penetration Testing
+    
+- Chaos Engineering
+    
+
+---
+
+# Scalability
+
+Ability of a system to handle increasing traffic.
+
+## Vertical Scaling (Scale Up)
+
+Increase CPU/RAM of one server.
+
+```
+1 Server
+2 CPU → 8 CPU
+8 GB → 64 GB
+```
+
+---
+
+## Horizontal Scaling (Scale Out)
+
+Add more servers.
+
+```
+Server 1
+Server 2
+Server 3
+     ▲
+Load Balancer
+```
+
+---
+
+# DevOps Automation
+
+Automating repetitive software delivery tasks.
+
+### Automation Areas
+
+- Build
+    
+- Testing
+    
+- Deployment
+    
+- Monitoring
+    
+
+### Popular Tools
+
+- Jenkins
+    
+- GitHub Actions
+    
+- Gradle
+    
+
+---
+
+# Continuous Integration (CI)
+
+Developers frequently merge code into a shared repository.
+
+Pipeline:
+
+```text
+Code
+ │
+Commit
+ │
+Build
+ │
+Automated Tests
+```
+
+### Benefits
+
+- Detect bugs early
+    
+- Frequent integration
+    
+- Better collaboration
+    
+
+---
+
+# Continuous Delivery (CD)
+
+Automatically prepares software for production.
+
+Pipeline:
+
+```text
+Code
+ │
+Build
+ │
+Test
+ │
+Staging
+ │
+Ready for Production
+```
+
+Deployment to Production is **manual**.
+
+---
+
+# Continuous Deployment
+
+Automatically deploys every successful build.
+
+Pipeline:
+
+```text
+Code
+ │
+Build
+ │
+Test
+ │
+Production
+```
+
+No manual approval required.
+
+---
+
+# CI/CD Pipeline
+
+```text
+Developer
+     │
+Git Push
+     │
+Continuous Integration
+(Build + Test)
+     │
+Continuous Delivery
+(Staging)
+     │
+Continuous Deployment
+(Production)
+     │
+Monitoring
+     │
+Feedback
+```
+
+---
+
+# Branching Strategies
+
+## Feature Branch Development
+
+- Separate branch for every feature
+    
+- Merge after completion
+    
+- Better isolation
+    
+- More merge conflicts
+    
+
+---
+
+## Trunk-Based Development
+
+- Small frequent commits
+    
+- Merge directly into main branch
+    
+- Faster integration
+    
+- Fewer conflicts
+    
+
+---
+
+# Feature Flags
+
+Feature Flags allow unfinished features to remain in production but hidden from users.
+
+### Benefits
+
+- Safe releases
+    
+- Easy rollback
+    
+- A/B testing
+    
+
+---
+
+# Dark Launch
+
+Deploy new features to production but enable them only for selected users.
+
+Purpose:
+
+- Test with real users
+    
+- Reduce deployment risk
+    
+
+---
+
+# Important Points ⭐
+
+- DevOps = Development + Operations.
+    
+- DevOps focuses on **Automation + Collaboration + Continuous Improvement**.
+    
+- Infrastructure includes servers, storage, networking, OS, and databases.
+    
+- IaC manages infrastructure using code.
+    
+- **Terraform → Provisioning**
+    
+- **Ansible, Chef, Puppet → Configuration**
+    
+- Monitoring answers **"What happened?"**
+    
+- Observability answers **"Why did it happen?"**
+    
+- Vertical Scaling = Bigger server.
+    
+- Horizontal Scaling = More servers.
+    
+- CI = **Merge → Build → Test**
+    
+- Continuous Delivery = Ready for Production (manual deployment).
+    
+- Continuous Deployment = Automatic deployment.
+    
+- Feature Flags hide unfinished features.
+    
+- Dark Launch exposes features to limited users.
+    
+
+---
+
+# One-Minute Revision 🚀
+
+- **DevOps:** Collaboration between Development & Operations.
+    
+- **Culture:** Automation, Feedback, Shared Responsibility.
+    
+- **Infrastructure:** In-house, Cloud, Serverless.
+    
+- **Environments:** Development → Integration → Testing → Staging → Production.
+    
+- **IaC:** Provisioning + Configuration using code (Terraform, Ansible).
+    
+- **Architectures:** Monolithic, N-Tier, Microservices.
+    
+- **Monitoring:** Metrics, Logs, Alerts.
+    
+- **Observability:** Understand _why_ issues occur.
+    
+- **Resiliency:** Load Balancing, Auto Scaling, Caching.
+    
+- **Scalability:** Vertical vs Horizontal.
+    
+- **Automation:** Build, Test, Deploy, Monitor.
+    
+- **CI:** Merge → Build → Test.
+    
+- **Continuous Delivery:** Production-ready release.
+    
+- **Continuous Deployment:** Automatic production release.
+    
+- **CI/CD:** End-to-end automated software delivery.
